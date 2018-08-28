@@ -13,6 +13,8 @@ import Header from './src/sections/components/header.js';
 import SuggestionList from './src/videos/containers/suggestion-list';
 import CategorieList from './src/videos/containers/categorie-list';
 import API from './src/utils/api';
+import Video from 'react-native-video';
+import Player from './src/videos/containers/player';
 
 
 type Props = {};
@@ -24,6 +26,7 @@ export default class App extends Component<Props> {
   async componentDidMount() {
     const movies =  await API.getSuggestion(10);
     const categories =  await API.getMovies();
+    console.log(categories);
     this.setState({
       suggestionList: movies,
       categorieList: categories,
@@ -34,6 +37,7 @@ export default class App extends Component<Props> {
       <Home>
         <Header>
         </Header>
+        <Player />
         <Text> Buscador </Text>
         <Text> Categorias </Text>
         <CategorieList
