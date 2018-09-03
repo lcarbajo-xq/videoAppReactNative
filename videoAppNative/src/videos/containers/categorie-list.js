@@ -5,6 +5,13 @@ import CLayout from '../components/categories-layout'
 import Empty from '../components/empty';
 import Separator from '../../sections/components/horizontal-separator';
 import Category from '../components/category';
+import { connect } from 'react-redux';
+
+function mapStateToProps(state) {
+  return {
+    list: state.categories,
+  }
+}
 
 class CategorieList extends Component {
   keyExtractor = item => item.id.toString()
@@ -32,4 +39,4 @@ class CategorieList extends Component {
   }
 }
 
-export default CategorieList;
+export default connect (mapStateToProps)(CategorieList);

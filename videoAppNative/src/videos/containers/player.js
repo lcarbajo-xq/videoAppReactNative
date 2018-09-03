@@ -10,6 +10,7 @@ import ControlLayout from '../components/control-layout';
 import PlayPause from '../components/play-pause';
 import ProgressBar from '../components/progress-bar';
 import Timer from '../components/timer';
+import FullScreen from '../components/fullscreen';
 
 class Player extends Component {
   state = {
@@ -19,6 +20,7 @@ class Player extends Component {
     duration: 0,
     currentTime: 0,
     changedTime: 0,
+    isFullScreenPresent: false,
   }
   onBuffer = ({isBuffering}) => {
     this.setState({
@@ -35,19 +37,28 @@ class Player extends Component {
       paused: !this.state.paused
     })
   }
-  sliderChange = (value) => {
+  sliderChangeValue = (value) => {
     this.setState({
-        currentTime: this.state.duration * value,
-        changedTime: this.state.currentTime
+        changedTime: this.state.duration * value,
       })
   }
   setTime = (current) => {
     this.setState({
       duration: current.seekableDuration,
       total: current.playableDuration,
-      currentTime: current.currentTime,
+      currentTime:  current.currentTime,
     })
   }
+  // presentFullScreen = () => {
+  //   if (this.state.isFullScreenPresent) {
+  //     this.player.dismissFullscreenPlayer();
+  //   } else {
+  //     this.player.presentFullscreenPlayer();
+  //   }
+  //   this.setState({
+  //     isFullScreenPresent: !this.state.isFullScreenPresent,
+  //   })
+  // }
   render() {
     return (
       <VideoLayout
@@ -75,13 +86,15 @@ class Player extends Component {
               <PlayPause onPress={this.playPause}
                          paused={this.state.paused}/>
               <ProgressBar
-                sliderActualValue={this.sliderChange}
+                sliderActualValue={this.sliderChangeValue}
                 duration={this.state.duration}/>
               <Timer
                 actualTime={timeReadable(this.state.currentTime)} //READABALE
                 totalTime={timeReadable(this.state.duration)}
                 />
-              <Text>| FS |</Text>
+              <FullScreen
+                isFullScreen={() => {this.player.presentFullscreenPlayer()}}
+                />
             </ControlLayout>
           }
         >

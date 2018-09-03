@@ -14,9 +14,10 @@ function ProgressBar (props) {
   return(
     <View style={styles.bar}>
       <Slider
-        onValueChange={props.sliderActualValue} />
+        onValueChange={props.sliderActualValue}
+        minimumTrackTintColor='#31a4db'/>
     </View>
-  )
+    )
 }
 
 const styles = StyleSheet.create({

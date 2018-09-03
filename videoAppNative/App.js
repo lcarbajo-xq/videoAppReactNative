@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native'; //AÑADIDO IMAGE
+import {Platform, StyleSheet, Text, View, Image} from 'react-native'; 
 import Home from './src/screens/containers/home.js';
 import Header from './src/sections/components/header.js';
 import SuggestionList from './src/videos/containers/suggestion-list';
@@ -16,37 +16,45 @@ import API from './src/utils/api';
 import Video from 'react-native-video';
 import Player from './src/videos/containers/player';
 
+import { Provider } from 'react-redux';
+import store from './src/utils/store';
+
 
 type Props = {};
 export default class App extends Component<Props> {
-  state = {
-    suggestionList: [],
-    categorieList: []
-  }
+
   async componentDidMount() {
     const movies =  await API.getSuggestion(10);
+    store.dispatch({
+      type:'SET_MOVIE_LIST',
+      payload:{
+        movies
+      }
+    })
+
     const categories =  await API.getMovies();
-    console.log(categories);
-    this.setState({
-      suggestionList: movies,
-      categorieList: categories,
+    store.dispatch({
+      type:'SET_SUGGESTION_LIST',
+      payload:{
+        categories
+      }
     })
   }
   render() {
     return (
-      <Home>
-        <Header>
-        </Header>
-        <Player />
-        <Text> Buscador </Text>
-        <Text> Categorias </Text>
-        <CategorieList
-          list={this.state.categorieList}
-          />
-          <SuggestionList
-            list={this.state.suggestionList}
+      <Provider
+        store={ store }>
+        <Home>
+          <Header>
+          </Header>
+          <Player />
+          <Text> Buscador </Text>
+          <CategorieList
             />
-      </Home>
+            <SuggestionList
+              />
+        </Home>
+      </Provider>
     );
   }
 }
