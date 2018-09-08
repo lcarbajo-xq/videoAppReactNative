@@ -4,28 +4,33 @@ import {
         Text,
         Image,
         StyleSheet,
+        TouchableOpacity,
       } from 'react-native';
 
 function Suggestion (props) {
   return(
-    <View style={styles.container}>
-      <View style={styles.left}>
-        <Image
-          style={styles.cover}
-          source={{
-            uri: props.medium_cover_image
-          }}
-        />
-        <View style={styles.genre}>
-          <Text style={styles.genreText}>{props.genres[0]}</Text>
+    <TouchableOpacity
+      onPress={ props.onPress }
+      >
+      <View style={styles.container}>
+        <View style={styles.left}>
+          <Image
+            style={styles.cover}
+            source={{
+              uri: props.medium_cover_image
+            }}
+          />
+          <View style={styles.genre}>
+            <Text style={styles.genreText}>{props.genres[0]}</Text>
+          </View>
+        </View>
+        <View style={styles.right}>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.year}>{props.year}</Text>
+          <Text style={styles.rating}>Puntuación {props.rating}</Text>
         </View>
       </View>
-      <View style={styles.right}>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.year}>{props.year}</Text>
-        <Text style={styles.rating}>Puntuación {props.rating}</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

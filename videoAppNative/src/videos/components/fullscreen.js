@@ -24,8 +24,7 @@ function FullSreen (props) {
       }}>
       <View>
         <Icon name="fullscreen" size={30} color="white"/>
-        <Text style={styles.button}>FS</Text>
-        </View>
+      </View>
       </TouchableHighlight>
   )
 }
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
   },
   container: {
     justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 10,
     marginLeft: 10,
     height: 25,

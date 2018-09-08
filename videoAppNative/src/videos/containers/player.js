@@ -15,7 +15,7 @@ import FullScreen from '../components/fullscreen';
 class Player extends Component {
   state = {
     loading: true,
-    paused: false,
+    paused: true,
     nowTime:  0,
     duration: 0,
     currentTime: 0,
@@ -70,6 +70,7 @@ class Player extends Component {
               }}
               source={{uri:'https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4'}}
               style={styles.video}
+              muted
               resizeMode="contain"
               currentTime={this.state.changedTime}
               onBuffer={this.onBuffer}
