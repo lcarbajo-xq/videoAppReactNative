@@ -9,7 +9,7 @@ import Header from './sections/components/header.js';
 import SuggestionList from './videos/containers/suggestion-list';
 import CategorieList from './videos/containers/categorie-list';
 import API from './utils/api';
-import Player from './videos/containers/player';
+import Searcher from './sections/containers/searcher';
 import Movie from './screens/containers/movie';
 
 class AppLayout extends React.Component {
@@ -37,7 +37,7 @@ class AppLayout extends React.Component {
             return (
                 <Home>
                     <Header />
-                    <Text> Buscador </Text>
+                    <Searcher />
                     <CategorieList />
                     <SuggestionList />
                 </Home>
